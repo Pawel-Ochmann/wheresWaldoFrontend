@@ -3,11 +3,30 @@ interface Coordinates {
   y: number;
 }
 
-const position: Coordinates = { x: 100, y: 100 };
-const radius: number = 20;
+const position: Coordinates = { x: 10, y: 10 };
+const radius: number = 10;
 
-export default function imageClickingHandler(click: MouseEvent): void {
-  const image = click.target as HTMLElement;
+function calculateRelativePosition(
+  imageX: number,
+  imageY: number,
+  imageWidth: number,
+  imageHeight: number
+): Coordinates {
+  const relativeX = (imageX / imageWidth) * 100;
+  const relativeY = (imageY / imageHeight) * 100;
+  return { x: relativeX, y: relativeY };
+}
+
+type ClickResult = boolean | Coordinates;
+
+export default function imageClickingHandler(click: MouseEvent):ClickResult {
+  interface Image {
+    width: number;
+    height: number;
+    getBoundingClientRect(): DOMRect;
+  }
+
+  const image = click.target as unknown as Image;
   const rect: DOMRect = image.getBoundingClientRect();
 
   const offsetX = rect.left + window.scrollX;
@@ -19,17 +38,32 @@ export default function imageClickingHandler(click: MouseEvent): void {
   const imageX = pageX - offsetX;
   const imageY = pageY - offsetY;
 
-  console.log('Clicked on image at:', imageX, imageY);
+  const imageWidth = image.width; // Get actual width of the image
+  const imageHeight = image.height; // Get actual height of the image
+
+  // Calculate relative position
+  const relativePosition = calculateRelativePosition(
+    imageX,
+    imageY,
+    imageWidth,
+    imageHeight
+  );
 
   const distance: number = Math.sqrt(
-    Math.pow(imageX - position.x, 2) + Math.pow(imageY - position.y, 2)
+    Math.pow(relativePosition.x - position.x, 2) + Math.pow(relativePosition.y - position.y, 2)
   );
+
   console.log('distance: ', distance);
+  console.log('Relative position:', relativePosition);
+
   if (distance <= radius) {
     console.log('Click is within radius of position');
-    // Perform further actions, such as tagging the object
+    
+    return position;
+
   } else {
     console.log('Click is outside the radius of position');
-    // Handle click outside the radius if needed
+    return false;
   }
+
 }
