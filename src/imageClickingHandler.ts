@@ -3,7 +3,7 @@ interface Coordinates {
   y: number;
 }
 
-const position: Coordinates = { x: 10, y: 10 };
+const position: Coordinates = { x: 42, y: 30 };
 const radius: number = 10;
 
 function calculateRelativePosition(
