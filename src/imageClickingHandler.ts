@@ -2,8 +2,6 @@ interface Coordinates {
   x: number;
   y: number;
 }
-
-const position: Coordinates = { x: 42, y: 30 };
 const radius: number = 10;
 
 function calculateRelativePosition(
@@ -19,7 +17,10 @@ function calculateRelativePosition(
 
 type ClickResult = boolean | Coordinates;
 
-export default function imageClickingHandler(click: MouseEvent):ClickResult {
+export default function imageClickingHandler(
+  click: React.MouseEvent<HTMLImageElement, MouseEvent>,
+  coordinates: Coordinates
+): ClickResult {
   interface Image {
     width: number;
     height: number;
@@ -50,20 +51,13 @@ export default function imageClickingHandler(click: MouseEvent):ClickResult {
   );
 
   const distance: number = Math.sqrt(
-    Math.pow(relativePosition.x - position.x, 2) + Math.pow(relativePosition.y - position.y, 2)
+    Math.pow(relativePosition.x - coordinates.x, 2) +
+      Math.pow(relativePosition.y - coordinates.y, 2)
   );
 
-  console.log('distance: ', distance);
-  console.log('Relative position:', relativePosition);
-
   if (distance <= radius) {
-    console.log('Click is within radius of position');
-    
-    return position;
-
+    return coordinates;
   } else {
-    console.log('Click is outside the radius of position');
     return false;
   }
-
 }

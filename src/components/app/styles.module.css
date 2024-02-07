@@ -1,0 +1,10 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    .gameBox {
+      max-width: 300px;
+      display: flex;
+      flex-direction: column;
+      border: 3px solid green;
+    }
+}
