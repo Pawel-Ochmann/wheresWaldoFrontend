@@ -2,7 +2,7 @@ interface Coordinates {
   x: number;
   y: number;
 }
-const radius: number = 10;
+const radius: number = 30;
 
 function calculateRelativePosition(
   imageX: number,

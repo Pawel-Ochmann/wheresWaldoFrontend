@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styles from './styles.module.css'
+import styles from './styles.module.css';
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
           </Link>
         </div>
         <div className={styles.gameBox}>
-          <img src='/wally3.jpeg' alt='' />
+          <img src='/wally3.png' alt='' />
           <Link to='/game' state={{ game: 3 }}>
             <button>Start game!</button>
           </Link>
