@@ -13,6 +13,7 @@ function Game() {
   const [time, setTime] = useState<number>(0);
   const [start, setStart] = useState(false);
   const [record, setRecord] = useState(0);
+  const [position, setPosition] = useState(11);
 
   interface Coordinates {
     x: number;
@@ -77,17 +78,19 @@ function Game() {
         throw new Error('Failed to fetch JWT');
       }
       const data = await response.json();
-      const { record, coordinates } = data;
+      const { record, coordinates, recordToken, position } = data;
 
       if (imageHandler(e, coordinates)) {
         localStorage.removeItem('jwt');
+        localStorage.setItem('record', recordToken);
         setStart(false);
         setRecord(record);
         setTimeout(() => {
           setWasFound(null);
         }, 2000);
         setCoordinates(coordinates);
-        console.log(coordinates, wasFound);
+        setPosition(position);
+        console.log('position: ', position);
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -101,7 +104,7 @@ function Game() {
   return (
     <>
       <h1>Welcome in where's waldo game</h1>
-      {record !== 0 && <RecordBox record={record}/>}
+      {record !== 0 && <RecordBox record={record} gameId={game.toString()} position={position}/>}
       {start && <Timer time={time} setTime={setTime} />}
 
       <div style={{ position: 'relative' }}>
