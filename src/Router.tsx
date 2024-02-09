@@ -11,6 +11,10 @@ export const routes = [
   {
     path: '/game',
     element: <Game />,
+  },
+  {
+    path:'/games/:id/records',
+    element: <Records />
   }
 ];
 

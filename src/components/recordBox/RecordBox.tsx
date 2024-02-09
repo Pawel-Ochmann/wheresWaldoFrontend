@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getTime } from '../../misc';
 import styles from './styles.module.css';
 import React, { useState } from 'react';
@@ -14,18 +14,30 @@ export default function recordBox({
 }) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [playerName, setPlayerName] = useState('');
+  const navigate = useNavigate();
 
-  function saveHandler(e: React.MouseEvent<HTMLButtonElement>):void {
+    type Record = {
+      name: string;
+      record: number;
+      date: Date;
+    };
+    type Data = { records: Record[] };
+
+  function saveHandler(e: React.MouseEvent<HTMLButtonElement>): void {
     e.preventDefault();
     const recordToSave = localStorage.getItem('record');
     if (recordToSave) {
-      fetch(`/api/games/${gameId}`, {
+
+      console.log('record and player name', recordToSave, playerName.trim())
+      fetch(`http://localhost:3000/games/${gameId}/save`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          record: recordToSave,
-          playerName: playerName.trim(),
         },
+        body: JSON.stringify({
+          record: recordToSave, // Assuming recordToSave is a number
+          playerName: playerName.trim(),
+        })
       })
         .then((response) => {
           if (!response.ok) {
@@ -33,8 +45,12 @@ export default function recordBox({
           }
           // Handle success
           console.log('Record saved successfully');
-          const data = response.json();
+
+          return response.json() as Promise<Data>;
+        })
+        .then((data) => {
           const { records } = data;
+          navigate(`/games/${gameId}/records`, { state: { records } });
         })
         .catch((error) => {
           // Handle error

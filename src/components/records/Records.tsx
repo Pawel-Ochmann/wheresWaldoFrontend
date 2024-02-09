@@ -1,4 +1,5 @@
 import React from 'react';
+import {useLocation} from 'react-router';
 
 interface Record {
   name: string;
@@ -10,7 +11,10 @@ interface Props {
   records: Record[];
 }
 
-const Records: React.FC<Props> = ({ records }) => {
+const Records: React.FC<Props> = () => {
+  const location = useLocation();
+  const records:Record[] = location.state.records;
+
   return (
     <div>
       <h2>Records</h2>
