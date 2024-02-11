@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 function Game() {
   const location = useLocation();
   const { game } = location.state;
-  const [wasFound, setWasFound] = useState<boolean | null>(null);
+  const [showMissInfo, setShowMissInfo] = useState<boolean>(false);
   const [time, setTime] = useState<number>(0);
   const [start, setStart] = useState(false);
   const [record, setRecord] = useState(0);
@@ -85,12 +85,13 @@ function Game() {
         localStorage.setItem('record', recordToken);
         setStart(false);
         setRecord(record);
-        setTimeout(() => {
-          setWasFound(null);
-        }, 2000);
         setCoordinates(coordinates);
         setPosition(position);
         console.log('position: ', position);
+      }
+      else {
+        setShowMissInfo(true);
+        setTimeout(()=>{setShowMissInfo(false)}, 2000)
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -108,7 +109,7 @@ function Game() {
       {start && <Timer time={time} setTime={setTime} />}
 
       <div style={{ position: 'relative' }}>
-        {wasFound !== null ? <Info wasFound={wasFound} /> : ''}
+        {showMissInfo && <Info />}
         <img onClick={markWaldo} src={imageAddress} alt='' />
         {record !== 0 && <Mark position={coordinates} />}
       </div>

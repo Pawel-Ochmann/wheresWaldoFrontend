@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import styles from './styles.module.css';
 import TopScores from '../topScores/TopScores';
+import Footer from '../footer/Footer';
 import axios from 'axios';
 
 function App() {
@@ -37,7 +38,7 @@ function App() {
           rec3,
         }: { rec1: Record[]; rec2: Record[]; rec3: Record[] } = response.data;
 
-        console.log(rec1, rec2, rec3)
+        console.log(rec1, rec2, rec3);
 
         setRecords1(rec1);
         setRecords2(rec2);
@@ -52,7 +53,10 @@ function App() {
 
   return (
     <div>
-      <h1>Where is Waldo?</h1>
+      <div className={styles.titleContainer}>
+        <h1 className={styles.title}>Where is Waldo?</h1>
+        <img src='./wally.png' alt='' />
+      </div>
       <div className={styles.container}>
         <div className={styles.gameBox}>
           <img src='/wally1.png' alt='' />
@@ -60,11 +64,15 @@ function App() {
             <button>Start game!</button>
           </Link>
           <button
+            className={styles.scores}
             onClick={() => {
               setScores1((prev) => !prev);
             }}
           >
             {!scores1 ? 'Show top 10 scores' : 'Hide scores'}
+            <div
+              className={`${styles.triangle} ${scores1 ? styles.rotate : ''}`}
+            ></div>
           </button>
           {scores1 ? (
             records1 === null ? (
@@ -80,11 +88,15 @@ function App() {
             <button>Start game!</button>
           </Link>
           <button
+            className={styles.scores}
             onClick={() => {
               setScores2((prev) => !prev);
             }}
           >
             {!scores2 ? 'Show top 10 scores' : 'Hide scores'}
+            <div
+              className={`${styles.triangle} ${scores2 ? styles.rotate : ''}`}
+            ></div>
           </button>
           {scores2 ? (
             records2 === null ? (
@@ -100,11 +112,15 @@ function App() {
             <button>Start game!</button>
           </Link>
           <button
+            className={styles.scores}
             onClick={() => {
               setScores3((prev) => !prev);
             }}
           >
             {!scores3 ? 'Show top 10 scores' : 'Hide scores'}
+            <div
+              className={`${styles.triangle} ${scores3 ? styles.rotate : ''}`}
+            ></div>
           </button>
           {scores3 ? (
             records3 === null ? (
@@ -115,6 +131,7 @@ function App() {
           ) : null}
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
