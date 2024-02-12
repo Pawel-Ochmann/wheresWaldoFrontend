@@ -52,7 +52,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.mainContainer}>
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>Where is Waldo?</h1>
         <img src='./wally.png' alt='' />

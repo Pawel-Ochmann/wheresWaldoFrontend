@@ -1,0 +1,14 @@
+.timer {
+    padding: 1rem;
+  background-color: #ffffffd7;
+  width: 115px;
+  height: 115px;
+  display: flex;
+  align-items: center;
+  border-radius: 100rem;
+  position: fixed;
+  z-index: 100;
+  top: 3rem;
+  left: 3rem;
+  border: 5px solid var(--background-color);
+}

@@ -4,7 +4,9 @@ import Mark from '../mark/Mark';
 import Info from '../info/Info';
 import Timer from '../timer/Timer';
 import RecordBox from '../recordBox/RecordBox';
-import { useLocation } from 'react-router-dom';
+import Footer from '../footer/Footer'
+import { useLocation, Link } from 'react-router-dom';
+import styles from './styles.module.css';
 
 function Game() {
   const location = useLocation();
@@ -104,7 +106,10 @@ function Game() {
 
   return (
     <>
-      <h1>Welcome in where's waldo game</h1>
+      <div className={styles.titleContainer}>
+        <h1>Quick, find wally!</h1>
+        <Link to={'/'}>Go back to main page</Link>
+      </div>
       {record !== 0 && <RecordBox record={record} gameId={game.toString()} position={position}/>}
       {start && <Timer time={time} setTime={setTime} />}
 
@@ -113,6 +118,7 @@ function Game() {
         <img onClick={markWaldo} src={imageAddress} alt='' />
         {record !== 0 && <Mark position={coordinates} />}
       </div>
+      <Footer></Footer>
     </>
   );
 }

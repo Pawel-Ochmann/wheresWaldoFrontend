@@ -1,5 +1,6 @@
 import { getTime } from '../../misc';
 import { DateTime } from 'luxon';
+import styles from './styles.module.css';
 
 
 interface Record {
@@ -16,12 +17,14 @@ const TopScores = ({ records }: { records:Record[] }) => {
       {records === null ? (
         <p>loading...</p>
       ) : (
-        <div>
+        <div className={styles.container}>
           <ul>
             {records.map((record, index) => (
               <li key={index}>
-                <div>Name: {record.name}</div>
-                <div>Record: {getTime(record.record)}</div>
+                <div className={styles.name}>{record.name}</div>
+                <div className={styles.record}>
+                  Record: <span>{getTime(record.record)}</span>
+                </div>
                 <div>
                   {`Date: `}
                   {DateTime.fromISO(record.date).toFormat(

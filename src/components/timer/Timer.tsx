@@ -1,4 +1,5 @@
 import  React, { useEffect } from 'react';
+import styles from './styles.module.css';
 
 interface TimerProps {
   time: number;
@@ -29,7 +30,7 @@ const formatTime = (time: number): string => {
   }
 };
   return (
-    <div>
+    <div className={styles.timer}>
       <h1>{formatTime(time)}</h1>
     </div>
   );
