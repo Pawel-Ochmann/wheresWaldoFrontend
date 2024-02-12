@@ -113,12 +113,12 @@ function Game() {
       {record !== 0 && <RecordBox record={record} gameId={game.toString()} position={position}/>}
       {start && <Timer time={time} setTime={setTime} />}
 
-      <div style={{ position: 'relative' }}>
+      <div className={styles.imageContainer}>
         {showMissInfo && <Info />}
         <img onClick={markWaldo} src={imageAddress} alt='' />
         {record !== 0 && <Mark position={coordinates} />}
       </div>
-      <Footer></Footer>
+      <Footer/>
     </>
   );
 }

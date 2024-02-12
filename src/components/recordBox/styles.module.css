@@ -1,12 +1,37 @@
 .box {
-    background-color: black;
-    width: 500px;
-    border: 3px solid red;
+  background-color: rgba(255, 255, 255, 0.767);
+  border: 3px solid var(--background-color);
+  padding: 0.3rem 1rem;
+  font-weight: 700;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  text-align: center;
+  position: fixed;
+  left: calc(50vw - 170px);
+  top: 50vh;
+  z-index: 100;
+  span {
+    color: red;
+    text-decoration: underline;
+  }
+  .formContainer {
     display: flex;
-    align-items: center;
     flex-direction: column;
-    position: fixed;
-    left: calc(50vw - 250px);
-    top: 40vh;
-    z-index: 100;
+    gap: .5rem;
+    input {
+        padding: .2rem 1rem;
+        border: 2px solid var(--background-color);
+        border-radius: 1rem;
+        margin-top: 1rem;
+        font-size: 1.1rem;
+    }
+    .saveButton {
+        color: var(--background-color);
+        border-bottom: 3px solid var(--background-color);
+    }
+    button:disabled {
+        color: rgb(172, 163, 163);
+    }
+  }
 }
+

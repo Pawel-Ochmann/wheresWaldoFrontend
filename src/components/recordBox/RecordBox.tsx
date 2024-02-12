@@ -67,25 +67,27 @@ export default function recordBox({
 
   return (
     <div className={styles.box}>
-      <p>{`Your record is ${getTime(record)}`}</p>
+      <p>Your record is <span>{`${getTime(record)}`}</span></p>
       {position > 10 ? (
         <p>Your position is out of best 10, try again!</p>
       ) : (
         <div>
-          <p>Its is top {position} best record!</p>
+          <p>Its is top <span>{position}</span> best record!</p>
           <p>Do you want to save your record?</p>
-          <input
-            type='text'
-            placeholder='Enter your name'
-            value={playerName}
-            onChange={handleInputChange}
-          />
-          <button onClick={saveHandler} disabled={!playerName.trim()}>
-            Save the record
-          </button>
-          <Link to={'/'}>
-            <button>Go back to main page</button>
-          </Link>
+          <div className={styles.formContainer}>
+            <input
+              type='text'
+              placeholder='Enter your name'
+              value={playerName}
+              onChange={handleInputChange}
+            />
+            <button className={styles.saveButton} onClick={saveHandler} disabled={!playerName.trim()}>
+              Save the record
+            </button>
+            <Link to={'/'}>
+              <button>Go back to main page</button>
+            </Link>
+          </div>
         </div>
       )}
     </div>
