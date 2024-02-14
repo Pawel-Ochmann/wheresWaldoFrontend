@@ -40,7 +40,9 @@ function Game() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/start');
+        const response = await fetch(
+          'https://whereswaldobackend.fly.dev/start'
+        );
         if (!response.ok) {
           throw new Error('Failed to fetch JWT');
         }
@@ -68,7 +70,7 @@ function Game() {
       if (!token) {
         throw new Error('JWT token not found in localStorage');
       }
-      const response = await fetch('http://localhost:3000/stop', {
+      const response = await fetch('https://whereswaldobackend.fly.dev/stop', {
         method: 'POST', // or 'PUT', 'DELETE', etc.
         headers: {
           'Content-Type': 'application/json',

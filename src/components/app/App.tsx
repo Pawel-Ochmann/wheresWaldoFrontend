@@ -30,7 +30,7 @@ function App() {
     const fetchRecords = async () => {
       try {
         const response = await axios.get<Records>(
-          `http://localhost:3000/games/records`
+          `https://whereswaldobackend.fly.dev/games/records`
         );
         const {
           rec1,

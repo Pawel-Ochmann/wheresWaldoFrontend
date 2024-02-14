@@ -29,7 +29,7 @@ export default function recordBox({
     if (recordToSave) {
 
       console.log('record and player name', recordToSave, playerName.trim())
-      fetch(`http://localhost:3000/games/${gameId}/save`, {
+      fetch(`https://whereswaldobackend.fly.dev/games/${gameId}/save`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ export default function recordBox({
         body: JSON.stringify({
           record: recordToSave, // Assuming recordToSave is a number
           playerName: playerName.trim(),
-        })
+        }),
       })
         .then((response) => {
           if (!response.ok) {
