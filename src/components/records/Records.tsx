@@ -1,8 +1,7 @@
-import React from 'react';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { getTime } from '../../misc';
-import {DateTime} from 'luxon';
+import { DateTime } from 'luxon';
 import styles from './styles.module.css';
 
 interface Record {
@@ -11,12 +10,7 @@ interface Record {
   date: string;
 }
 
-interface Props {
-  records: Record[];
-}
-
-
-const Records: React.FC<Props> = () => {
+const Records = () => {
   const location = useLocation();
   const records: Record[] = location.state.records;
 
@@ -29,11 +23,15 @@ const Records: React.FC<Props> = () => {
       <ul>
         {records.map((record, index) => (
           <li key={index}>
-            <div>Name: <span>{record.name}</span></div>
-            <div>Record: <span>{getTime(record.record)}</span></div>
+            <div>
+              Name: <span>{record.name}</span>
+            </div>
+            <div>
+              Record: <span>{getTime(record.record)}</span>
+            </div>
             <div>
               {`Date: `}
-               {DateTime.fromISO(record.date).toFormat('yyyy-MM-dd HH:mm:ss')}
+              {DateTime.fromISO(record.date).toFormat('yyyy-MM-dd HH:mm:ss')}
             </div>
           </li>
         ))}
