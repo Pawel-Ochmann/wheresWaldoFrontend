@@ -20,7 +20,7 @@ If you have any questions, or spot a bug, contact me via linked in - https://www
 
 ![Game Screenshot](/screenshots//game.png)
 
-## Dark Mode
+## Top Scores
 
 ![Top Scores Screenshot](/screenshots//topScores.png)
 
